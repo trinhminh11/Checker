@@ -1,4 +1,4 @@
-function heart_function(t, shrink_ratio = 2) {
+function heart_function(t, shrink_ratio = 2.5) {
     choice = random(1)
     if (choice < 0.5) {
         v1 = 1
@@ -98,7 +98,7 @@ function Heart() {
 
         for (var i = 0; i <= halo_number; i++) {
             t = random(0, 60)
-            k1 = heart_function(t, shrink_ratio = 2.03)
+            k1 = heart_function(t, shrink_ratio = 2.6)
             k2 = shrink(k1[0], k1[1], halo_radius)
             x = k2[0]
             y = k2[1]
