@@ -78,7 +78,7 @@ function Heart() {
 
         }
         
-        for (var i = 0; i < 4000; i++) {
+        for (var i = 0; i < 2000; i++) {
             pointt = random(point_list)
             k = scatter_inside(pointt[0], pointt[1], 0.17)
             this._center_diffusion_points.add([k[0], k[1]])
@@ -89,7 +89,7 @@ function Heart() {
     this.calc = function (generate_frame1) {
         ratio = 10 * curvee(generate_frame1 / 10 * PI)
         halo_radius = int(4 + 6 * (1 + curvee(generate_frame1 / 10 * PI)))
-        halo_number = int(3000 + 4000 * abs(pow(curvee(generate_frame1 / 10 * PI), 2)))
+        halo_number = int(3000 + 2000 * abs(pow(curvee(generate_frame1 / 10 * PI), 2)))
 
         all_points = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
