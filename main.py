@@ -8,7 +8,7 @@ def get_row_col_from_mouse(pos):
 	col = x // SQUARE_SIZE
 	return row, col
 
-def draw_screen(screen, game):
+def draw_screen(screen, game: Game):
 	game.update(screen)
 	pygame.display.update()
 
