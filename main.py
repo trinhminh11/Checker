@@ -25,8 +25,11 @@ def main():
 	while run:
 		clock.tick(FPS)
 
-		if game.board.winner()!= None:
-			print(game.board.winner())
+		winner = game.board.winner()
+
+		if winner != None:
+			print(winner)
+
 		draw_screen(screen, game)
 
 		for event in pygame.event.get():
@@ -37,8 +40,13 @@ def main():
 				pos = pygame.mouse.get_pos()
 				row, col = get_row_col_from_mouse(pos)
 				game.select(row, col)
+			
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_RETURN and winner:
+					game.reset()
 	
 	pygame.quit()
 
 if __name__ == '__main__':
 	main()
+	
