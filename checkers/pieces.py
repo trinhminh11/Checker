@@ -1,9 +1,13 @@
+import pygame
 from .CONSTANTS import *
+
+CROWN = pygame.transform.scale(pygame.image.load(CROWN_PATH), (45, 25))
+
 
 class Piece(object):
 	PADDING = 15
 	BORDER = 2
-	def __init__(self, row, col, color):
+	def __init__(self, row: int, col: int, color: tuple[int, int, int]):
 		self.row = row
 		self.col = col
 		self.color = color
@@ -21,7 +25,7 @@ class Piece(object):
 	def make_king(self):
 		self.king = True
 
-	def draw(self, screen):
+	def draw(self, screen: pygame.Surface):
 		radius = SQUARE_SIZE//2 - self.PADDING
 		pygame.draw.circle(screen, GREY, (self.x, self.y), radius + self.BORDER)
 		pygame.draw.circle(screen, self.color, (self.x, self.y), radius)

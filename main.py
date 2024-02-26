@@ -2,9 +2,7 @@ import pygame
 from checkers import Game
 from checkers.CONSTANTS import *
 
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Checkers')
-clock = pygame.time.Clock()
+
 
 def get_row_col_from_mouse(pos):
 	x, y = pos
@@ -14,19 +12,27 @@ def get_row_col_from_mouse(pos):
 
 def draw_screen(screen, game):
 	game.update(screen)
-
 	pygame.display.update()
 
 
 def main():
+	pygame.init()
+
+	screen = pygame.display.set_mode((WIDTH, HEIGHT))
+	pygame.display.set_caption('Checkers')
+	clock = pygame.time.Clock()
+
 	game = Game()
+
 
 	run = True
 	while run:
 		clock.tick(FPS)
+
 		if game.board.winner()!= None:
 			print(game.board.winner())
 		draw_screen(screen, game)
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
