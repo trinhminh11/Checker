@@ -1,4 +1,5 @@
 from .CONSTANTS import *
+
 class Piece(object):
 	PADDING = 15
 	BORDER = 2

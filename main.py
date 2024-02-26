@@ -1,6 +1,6 @@
 import pygame
-from checkers import *
-
+from checkers import Game
+from checkers.CONSTANTS import *
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Checkers')
@@ -14,6 +14,9 @@ def get_row_col_from_mouse(pos):
 
 def draw_screen(screen, game):
 	game.update(screen)
+
+	pygame.display.update()
+
 
 def main():
 	game = Game()

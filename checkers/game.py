@@ -1,5 +1,6 @@
 import pygame
-from . import *
+from .board import Board
+from .CONSTANTS import *
 
 class Game(object):
 	def __init__(self):
