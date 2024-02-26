@@ -60,19 +60,22 @@ class Board(object):
 		right = piece.col + 1
 		row = piece.row
 
-		if piece.color == RED and not piece.king:
-			moves.update(self.__traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))
-			moves.update(self.__traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))
-
-		if piece.color == WHITE and not piece.king:
-			moves.update(self.__traverse_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
-			moves.update(self.__traverse_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
-
 		if piece.king:
 			moves.update(self.__traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))
 			moves.update(self.__traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))
 			moves.update(self.__traverse_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
 			moves.update(self.__traverse_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
+
+		else:
+			if piece.color == RED:
+				moves.update(self.__traverse_left(row - 1, max(row - 3, -1), -1, piece.color, left))
+				moves.update(self.__traverse_right(row - 1, max(row - 3, -1), -1, piece.color, right))
+
+			if piece.color == WHITE:
+				moves.update(self.__traverse_left(row + 1, min(row + 3, ROWS), 1, piece.color, left))
+				moves.update(self.__traverse_right(row + 1, min(row + 3, ROWS), 1, piece.color, right))
+
+			
 
 
 		return moves
@@ -87,21 +90,22 @@ class Board(object):
 
 			current = self.board[r][left]
 			if current == 0:
-				if skipped and not last:
-					break
-				elif skipped:
-					moves[(r, left)] = last + skipped
+				if skipped:
+					if  last:
+						moves[(r, left)] = last + skipped
+					else:
+						break
 				else:
 					moves[(r, left)] = last
 
 				if last:
 					if step == -1:
-						row = max(r - 3, 0)
+						row = max(r - 3, -1)
 					else:
 						row = min(r + 3, ROWS)
 
-					moves.update(self.__traverse_left(r + step, row, step, color, left - 1, skipped = last))
-					moves.update(self.__traverse_right(r + step, row, step, color,left + 1, skipped = last))
+					moves.update(self.__traverse_left(r + step, row, step, color, left - 1, skipped = skipped + last))
+					moves.update(self.__traverse_right(r + step, row, step, color,left + 1, skipped = skipped + last))
 				break
 			elif current.color == color:
 				break
@@ -120,21 +124,23 @@ class Board(object):
 
 			current = self.board[r][right]
 			if current == 0:
-				if skipped and not last:
-					break
-				elif skipped:
-					moves[(r, right)] = last + skipped
+				if skipped:
+					if last:
+						moves[(r, right)] = last + skipped
+					
+					else:
+						break
 				else:
 					moves[(r, right)] = last
 
 				if last:
 					if step == -1:
-						row = max(r - 3, 0)
+						row = max(r - 3, -1)
 					else:
 						row = min(r + 3, ROWS)
 
-					moves.update(self.__traverse_left(r + step, row, step, color, right - 1, skipped = last))
-					moves.update(self.__traverse_right(r + step, row, step, color, right + 1, skipped = last))
+					moves.update(self.__traverse_left(r + step, row, step, color, right - 1, skipped = skipped + last))
+					moves.update(self.__traverse_right(r + step, row, step, color, right + 1, skipped = skipped + last))
 				break
 			elif current.color == color:
 				break
@@ -143,6 +149,7 @@ class Board(object):
 			right += 1
 
 		return moves
+	
 	def remove(self, pieces):
 		for piece in pieces:
 			self.board[piece.row][piece.col] = 0
