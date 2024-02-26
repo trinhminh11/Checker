@@ -17,6 +17,7 @@ class Game(object):
 		self.turn = RED
 		self.valid_moves = {}
 
+
 	def reset(self):
 		self.__init()
 
