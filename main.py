@@ -2,8 +2,6 @@ import pygame
 from checkers import Game
 from checkers.CONSTANTS import *
 
-
-
 def get_row_col_from_mouse(pos):
 	x, y = pos
 	row = y // SQUARE_SIZE
@@ -14,7 +12,6 @@ def draw_screen(screen, game):
 	game.update(screen)
 	pygame.display.update()
 
-
 def main():
 	pygame.init()
 
@@ -23,7 +20,6 @@ def main():
 	clock = pygame.time.Clock()
 
 	game = Game()
-
 
 	run = True
 	while run:
@@ -41,7 +37,6 @@ def main():
 				pos = pygame.mouse.get_pos()
 				row, col = get_row_col_from_mouse(pos)
 				game.select(row, col)
-				
 	
 	pygame.quit()
 
