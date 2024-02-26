@@ -1,24 +1,28 @@
 import pygame
 from .board import Board
 from .CONSTANTS import *
+from .Minimax import Minimax
 
 class Game(object):
-	def __init__(self):
-		self.__init()
+	def __init__(self, turn):
+		self.__init(turn)
 
 	def update(self, screen):
 		self.board.draw(screen)
 		self.draw_valid_moves(self.valid_moves, screen)
+		self.bot.play()
 		pygame.display.update()
 
-	def __init(self):
+	def __init(self, turn):
 		self.selected = None
 		self.board = Board()
-		self.turn = RED
+		self.turn = turn
 		self.valid_moves = {}
 
-	def reset(self):
-		self.__init()
+		self.bot = Minimax()
+
+	def reset(self, turn):
+		self.__init(turn)
 
 	def select(self, row: int, col: int):
 		if self.selected:

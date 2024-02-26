@@ -8,7 +8,7 @@ def get_row_col_from_mouse(pos):
 	col = x // SQUARE_SIZE
 	return row, col
 
-def draw_screen(screen, game):
+def draw_screen(screen, game: Game):
 	game.update(screen)
 	pygame.display.update()
 
@@ -19,7 +19,10 @@ def main():
 	pygame.display.set_caption('Checkers')
 	clock = pygame.time.Clock()
 
-	game = Game()
+
+	first_play = RED
+
+	game = Game(first_play)
 
 	run = True
 	while run:
@@ -37,13 +40,14 @@ def main():
 				run = False
 
 			if event.type == pygame.MOUSEBUTTONDOWN:
-				pos = pygame.mouse.get_pos()
-				row, col = get_row_col_from_mouse(pos)
-				game.select(row, col)
+				if game.turn == first_play:
+					pos = pygame.mouse.get_pos()
+					row, col = get_row_col_from_mouse(pos)
+					game.select(row, col)
 			
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_RETURN and winner:
-					game.reset()
+					game.reset(winner)
 	
 	pygame.quit()
 
