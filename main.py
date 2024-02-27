@@ -9,8 +9,10 @@ def get_row_col_from_mouse(pos):
 	return row, col
 
 def draw_screen(screen, game: Game):
+	
 	game.update(screen)
-	pygame.display.update()
+	screen.blit(pygame.transform.rotate(screen, 90), (0, 0))
+
 
 def main():
 	pygame.init()
@@ -21,8 +23,9 @@ def main():
 
 
 	first_play = RED
+	bot_play = WHITE
 
-	game = Game(first_play)
+	game = Game(bot_play)
 
 	run = True
 	while run:

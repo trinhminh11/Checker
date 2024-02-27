@@ -43,7 +43,7 @@ class Board(object):
 		return self.board[row][col]
 
 	def get_valid_moves(self, piece: Piece):
-		moves = {}
+		moves: dict[tuple[int, int], list[Piece]] = {}
 		left = piece.col - 1
 		right = piece.col + 1
 		row = piece.row
@@ -67,7 +67,7 @@ class Board(object):
 		last = []
 
 		for r in range(start, stop, step):
-			if col < -1 or col >= COLS:
+			if col < 0 or col >= COLS:
 				break
 
 			current = self.board[r][col]
@@ -116,6 +116,7 @@ class Board(object):
 			self.board[piece.row][piece.col] = 0
 			if piece != 0:
 				color = piece.color
+
 				self.pieces[color].remove(piece)
 				if piece.king:
 					self.kings[color].remove(piece)

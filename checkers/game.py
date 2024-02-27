@@ -10,7 +10,11 @@ class Game(object):
 	def update(self, screen):
 		self.board.draw(screen)
 		self.draw_valid_moves(self.valid_moves, screen)
-		self.bot.play()
+		
+		if self.turn == self.bot.color:
+			self.board = self.bot.move(self.board)
+			self.change_turn()
+
 		pygame.display.update()
 
 	def __init(self, turn):
