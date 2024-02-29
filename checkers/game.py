@@ -2,6 +2,7 @@ import pygame
 from .board import Board
 from .CONSTANTS import *
 from .Minimax import Minimax
+from reinforced_model import reinforced_model
 
 class Game(object):
 	def __init__(self, turn):
@@ -24,6 +25,9 @@ class Game(object):
 		self.valid_moves = {}
 
 		self.bot = Minimax()
+
+		# self.bot = reinforced_model.model
+
 
 	def reset(self, turn):
 		self.__init(turn)
