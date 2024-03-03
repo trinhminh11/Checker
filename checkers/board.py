@@ -1,6 +1,7 @@
 import pygame
 from .CONSTANTS import *
 from .pieces import Piece
+import numpy as np
 
 class Board(object):
 	def __init__(self):
@@ -128,6 +129,51 @@ class Board(object):
 			return RED
 
 		return None
+	
+	def to_matrix(self):
+		board: list[list[int]] = [[0 for _ in range(COLS)] for _ in range(ROWS)]
+		
+		for row in range(ROWS):
+			for col in range(COLS):
+				piece = self.board[row][col]
+				if piece == 0:
+					board[row][col] = 0
+				else:
+					if piece.king:
+						board[row][col] = 3
+					else:
+						board[row][col] = 1
+
+					if piece.color == RED:
+						board[row][col] = - board[row][col]
+		
+		return np.array(board)
+
+	def to_board(self, board):
+		self.pieces: dict[tuple[int, int, int], list[Piece]] = {RED: [], WHITE: []}
+		self.kings: dict[tuple[int, int, int], list[Piece]] = {RED: [], WHITE: []}
+		for row in range(ROWS):
+			for col in range(COLS):
+				self.board[row][col] = 0
+				
+				if board[row][col] == 0:
+					continue
+
+
+				color = RED
+				if board[row][col] > 0:
+					color = WHITE
+
+				piece = Piece(row, col, color)
+
+				self.pieces[color].append(piece)
+
+				self.board[row][col] = piece
+
+				if abs(board[row][col]) == 3:
+					piece.king = True
+					self.kings[color].append(piece)
+
 
 	def draw_board(self, screen: pygame.Surface):
 		screen.fill(BLACK)

@@ -1,7 +1,8 @@
 import torch
 import torch.nn as nn
+import os
 
-
+cur_path = os.path.dirname(__file__)
 
 class Reinforcement_Network(nn.Module):
 	def __init__(self) -> None:
@@ -33,7 +34,7 @@ class Reinforcement_Network(nn.Module):
 class Model:
 	def __init__(self) -> None:
 		self.model = Reinforcement_Network()
-		self.model.load_state_dict(torch.load('/Q-Learning Model/results/reinforced_model.pth'))
+		self.model.load_state_dict(torch.load(cur_path + '/Q-Learning Model/results/reinforced_model.pth'))
 	
 
 	def move(self):

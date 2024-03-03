@@ -9,9 +9,7 @@ def get_row_col_from_mouse(pos):
 	return row, col
 
 def draw_screen(screen, game: Game):
-	
 	game.update(screen)
-	screen.blit(pygame.transform.rotate(screen, 90), (0, 0))
 
 
 def main():
@@ -49,7 +47,7 @@ def main():
 					game.select(row, col)
 			
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_RETURN and winner:
+				if event.key == pygame.K_RETURN and (winner or game.no_valid_move):
 					game.reset(winner)
 	
 	pygame.quit()
