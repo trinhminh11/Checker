@@ -4,6 +4,7 @@ from copy import deepcopy
 import numpy as np
 from .board_method import *
 
+# all method that don't have _ in the first letter is old Algorithm
 class Minimax:
 	def __init__(self, color: tuple[int, int, int] = WHITE) -> None:
 		self.color = color
@@ -41,7 +42,7 @@ class Minimax:
 
 		# value, new_board = self.minimax(board, 3, True)
 
-		value, new_board = self._minimax(board_matrix, 3, float('-inf'), float('inf'), True)
+		value, new_board = self._minimax(board_matrix, 4, float('-inf'), float('inf'), True)
 
 
 		return new_board
